@@ -1,7 +1,7 @@
 'use strict';
 
 /**
- * Represents a book.
+ * Set a value by path.
  * @constructor
  * @param {Object} object - Object for whose field you want to set a value.
  * @param {string} path - Path to set value
