@@ -1,17 +1,28 @@
 'use strict';
 
-const set = function (object, path, value) {
-    let fields = path.split('.');
-    let currVal = object;
-    let lastField = fields[fields.length - 1];
+/**
+ * Represents a book.
+ * @constructor
+ * @param {Object} object - Object for whose field you want to set a value.
+ * @param {string} path - Path to set value
+ * @param {Object} value - Value to set.
+ * 
+ * @return {Object}  The value that was set.
+ * 
+ * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
+ */
+const set = (object, path, value) => {
+    const fields = path.split('.').slice(1);
+    const lastField = fields.at(-1);
     
-    for (let i = 1; i < fields.length - 1; i++) {
-        console.log(fields[i]);
-        if (!currVal[fields[i]]) {
-            currVal[fields[i]] = {};
+    let currVal = object;
+    fields.slice(0,-1).forEach(field => {
+        if (!currVal[field]) {
+            currVal[field] = {};
         }
-        currVal = currVal[fields[i]];
-    }
+        currVal = currVal[field];
+    });
+
     currVal[lastField] = value;
 
     return object;
