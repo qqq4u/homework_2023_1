@@ -2,7 +2,7 @@
 
 /**
  * Set a value by path.
- * @constructor
+ * @function
  * @param {Object} object - Object for whose field you want to set a value.
  * @param {string} path - Path to set value
  * @param {Object} value - Value to set.
@@ -11,7 +11,11 @@
  * 
  * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
  */
+
 const set = (object, path, value) => {
+    if (typeof path !== 'string'){
+        throw Error('Path need to be a string!');
+    }
     const fields = path.split('.').slice(1);
     const lastField = fields.at(-1);
     
