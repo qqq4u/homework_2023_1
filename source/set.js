@@ -1,5 +1,46 @@
 'use strict';
 
+
+/**
+ * Check if path is string
+ * @function
+ * @param {Object} path - Path to validate
+ * 
+ * @return {boolean} - Result of validating
+ * 
+ * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
+ */
+const checkPathIsString = (path) => {
+    return (typeof path === 'string' || Object.prototype.toString.call(path) === "[object String]");
+}
+
+/**
+ * Check if object is valid
+ * @function
+ * @param {Object} object - Object to validate
+ * 
+ * @return {boolean} - Result of validating
+ * 
+ * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
+ */
+const checkObjectIsValid = (object) => {
+    return (object && !Number.isNaN(object) && typeof object !== 'function' && object !== null) 
+}
+
+/**
+ * Check if value is valid
+ * @function
+ * @param {Object} value - Object to validate
+ * 
+ * @return {boolean} - Result of validating
+ * 
+ * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
+ */
+const checkValueIsValid = (value) => {
+    return (value !== undefined &&  !Number.isNaN(value) && typeof value !== 'function') 
+}
+
+
 /**
  * Set a value by path.
  * @function
@@ -11,23 +52,13 @@
  * 
  * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
  */
-
-const checkPathIsString = (path) => {
-    return (typeof path === 'string' || Object.prototype.toString.call(path) === "[object String]");
-}
-
-const checkValueISValid = (valueToCheck) => {
-    return (valueToCheck !== undefined && valueToCheck===valueToCheck && typeof valueToCheck !== 'function') 
-}
-
-
 const set = (object, path, value) => {
     if (!checkPathIsString(path)){
         throw new TypeError('Path need to be a string!');
-    } if (!checkValueISValid(object)){
-        throw new TypeError(`Wrong object type`);
-    } if (!checkValueISValid(value)){
-        throw new TypeError(`Wrong value type`);
+    } if (!checkObjectIsValid(object)){
+        throw new TypeError('Wrong object type');
+    } if (!checkValueIsValid(value)){
+        throw new TypeError('Wrong value type');
     }
     
     const fields = path.split('.').slice(1);
@@ -45,3 +76,5 @@ const set = (object, path, value) => {
 
     return object;
 }
+
+

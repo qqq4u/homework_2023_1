@@ -30,7 +30,7 @@ QUnit.module('Тестируем функцию set', function () {
 			deep: null
 		};
 
-		assert.deepEqual(set({foo:'bar'}, '.foo', 'baz'), {foo:'baz'});
+		assert.deepEqual(set({foo: 'bar'}, '.foo', 'baz'), {foo: 'baz'});
 		assert.deepEqual(set(object, '.deep.hested.field', 42), object2);
 
 		assert.deepEqual(set(object, '.deep.hested', {foo: 'bar'}), object3);
@@ -174,6 +174,8 @@ QUnit.module('Тестируем функцию set', function () {
 		assert.throws (()=>set(undefined,'.foo','baz'),new TypeError('Wrong object type'));
 		assert.throws (()=>set(NaN,'.foo','baz'),new TypeError('Wrong object type'));
 		assert.throws (()=>set((value) => {return value},'.foo','baz'),new TypeError('Wrong object type'));
+		assert.throws (()=>set(null,'.foo','baz'),new TypeError('Wrong object type'));
+
 
 		assert.throws (()=>set(object,'.foo',Math.sqrt(-1)),new TypeError('Wrong value type'));
 		assert.throws (()=>set(object,'.foo',undefined),new TypeError('Wrong value type'));
