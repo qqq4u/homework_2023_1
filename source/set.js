@@ -12,10 +12,24 @@
  * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
  */
 
+const checkPathIsString = (path) => {
+    return (typeof path === 'string' || Object.prototype.toString.call(path) === "[object String]");
+}
+
+const checkValueISValid = (valueToCheck) => {
+    return (valueToCheck !== undefined && valueToCheck===valueToCheck && typeof valueToCheck !== 'function') 
+}
+
+
 const set = (object, path, value) => {
-    if (typeof path !== 'string'){
-        throw Error('Path need to be a string!');
+    if (!checkPathIsString(path)){
+        throw new TypeError('Path need to be a string!');
+    } if (!checkValueISValid(object)){
+        throw new TypeError(`Wrong object type`);
+    } if (!checkValueISValid(value)){
+        throw new TypeError(`Wrong value type`);
     }
+    
     const fields = path.split('.').slice(1);
     const lastField = fields.at(-1);
     
