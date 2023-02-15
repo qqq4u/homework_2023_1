@@ -11,7 +11,7 @@
  * @author Danila Polyakov <polyakovdd@student.bmstu.ru>
  */
 const checkPathIsString = (path) => {
-    return (typeof path === 'string' || Object.prototype.toString.call(path) === "[object String]");
+    return (typeof path === 'string' || path instanceof String);
 }
 
 /**
